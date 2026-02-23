@@ -111,7 +111,7 @@ PACKAGE=MY_PACKAGE_NAME SRC_ACCESS_TOKEN=MY_TOKEN SRC_ENDPOINT=https://sourcegra
 
 ## Release a new version
 
-First, add release notes to the [CHANGELOG](CHANGELOG.md). Next, update the
+First, add release notes to the [CHANGELOG](../CHANGELOG.md). Next, update the
 version in `cmd/scip/version.txt`, `bindings/rust/Cargo.toml`,
 `bindings/rust/Cargo.lock`, and `docs/CLI.md`
 

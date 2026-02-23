@@ -15,7 +15,7 @@ This repository includes:
   a breeze to work with.
 
 If you're interested in better understanding the motivation behind SCIP,
-check out the [announcement blog post](https://about.sourcegraph.com/blog/announcing-scip) and the [design doc](./DESIGN.md).
+check out the [announcement blog post](https://about.sourcegraph.com/blog/announcing-scip) and the [design doc](./docs/DESIGN.md).
 
 If you're interested in writing a new indexer that emits SCIP,
 check out our documentation on
@@ -28,7 +28,7 @@ or generate code for the [SCIP Protobuf schema](./scip.proto)
 using the Protobuf toolchain for your language ecosystem.
 Also, check out the [Debugging section][] in the Development docs.
 
-[debugging section]: ./Development.md#debugging
+[debugging section]: ./docs/Development.md#debugging
 
 ## Tools using SCIP
 
@@ -67,7 +67,7 @@ You can consult the [CLI reference](docs/CLI.md) or `--help` for usage informati
 
 We welcome questions, suggestions as well as code and docs contributions.
 
-For submitting contributions, check out [Development.md](./Development.md)
+For submitting contributions, check out [Development.md](./docs/Development.md)
 to better understand project structure and common workflows.
 
 Contributors should abide by the [Sourcegraph Code of Conduct](https://handbook.sourcegraph.com/company-info-and-process/communication/code_of_conduct/).
