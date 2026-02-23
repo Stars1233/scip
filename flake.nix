@@ -86,14 +86,14 @@
               name = "proto-generate";
               runtimeInputs = with pkgs; [
                 buf
-                protoc-gen-doc
-                protoc-gen-go
                 gotools
-                protoc-gen-rs
                 haskellPackages.proto-lens-protoc
                 nodejs
+                prettier
+                protoc-gen-doc
+                protoc-gen-go
+                protoc-gen-rs
                 yarn
-                nodePackages.prettier
               ];
               text = ''
                 yarn --cwd ./bindings/typescript install --frozen-lockfile
@@ -115,7 +115,7 @@
             ;
         };
 
-        formatter = pkgs.nixfmt-rfc-style;
+        formatter = pkgs.nixfmt;
 
         devShells.default = pkgs.mkShell {
           inputsFrom = [ self.packages.${system}.scip ];
@@ -131,8 +131,8 @@
               yarn
             ]
             ++ (with pkgs.haskellPackages; [
-              ghc
               cabal-install
+              ghc
               proto-lens-runtime
             ]);
         };
