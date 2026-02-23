@@ -1,5 +1,9 @@
 # Configuration file for https://buf.build/, which we use for Protobuf code generation.
 version: v1
+build:
+  excludes:
+    - .direnv
+    - node_modules
 lint:
   use:
     - DEFAULT
