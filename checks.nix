@@ -27,7 +27,7 @@
     pname = "scip-bindings-go";
     inherit version;
     src = ./.;
-    vendorHash = "sha256-ywSR9yRysnm2E6kI8UJS6XcpuqKJF8wJpHcYS7TGmjI=";
+    vendorHash = "sha256-JuGh7/CnpCWABK6WYE+Mo7P8X0glFrFa9ve9eO//1v8=";
     buildTags = [ "asserts" ];
     subPackages = [
       "bindings/go/scip"
@@ -56,19 +56,22 @@
 
   reprolang =
     let
-      reprolangVersion =
-        (builtins.fromJSON (builtins.readFile ./cmd/scip/tests/reprolang/package.json)).version;
+      reprolangVersion = (builtins.fromJSON (builtins.readFile ./reprolang/package.json)).version;
     in
-    assert pkgs.lib.assertMsg (reprolangVersion == version)
-      "Version mismatch in cmd/scip/tests/reprolang/package.json: expected ${version}, got ${reprolangVersion}";
+    assert pkgs.lib.assertMsg (
+      reprolangVersion == version
+    ) "Version mismatch in reprolang/package.json: expected ${version}, got ${reprolangVersion}";
     pkgs.buildGoModule {
       pname = "scip-reprolang";
       inherit version;
       src = ./.;
-      vendorHash = "sha256-ywSR9yRysnm2E6kI8UJS6XcpuqKJF8wJpHcYS7TGmjI=";
+      modRoot = "./reprolang";
+      vendorHash = "sha256-H6RLXmQsufwKtI5BujsUEibVuCMpILqtX3W0Wg9m3T8=";
+      proxyVendor = true;
+      buildInputs = [ pkgs.tree-sitter ];
       subPackages = [
-        "cmd/scip/tests/reprolang/src"
-        "cmd/scip/tests/reprolang/bindings/go/repro"
+        "grammar"
+        "repro"
       ];
       installPhase = "touch $out";
     };
@@ -83,11 +86,11 @@
       tree-sitter
     ];
     buildPhase = ''
-      cd cmd/scip/tests/reprolang
-      cp -r src src-before
-      tree-sitter generate --abi 14
-      prettier --write 'src/grammar.json' 'src/node-types.json'
-      diff -rq src-before src
+      cd reprolang
+      cp -r grammar grammar-before
+      tree-sitter generate --abi 14 --output grammar
+      prettier --write 'grammar/grammar.json' 'grammar/node-types.json'
+      diff -rq grammar-before grammar
     '';
     installPhase = "touch $out";
   };
